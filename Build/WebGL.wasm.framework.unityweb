@@ -1512,7 +1512,7 @@ function _emscripten_asm_const_ii(code, a0) {
  return ASM_CONSTS[code](a0);
 }
 STATIC_BASE = GLOBAL_BASE;
-STATICTOP = STATIC_BASE + 3162048;
+STATICTOP = STATIC_BASE + 3163120;
 __ATINIT__.push({
  func: (function() {
   __GLOBAL__sub_I_AccessibilityScriptingClasses_cpp();
@@ -3363,10 +3363,6 @@ __ATINIT__.push({
  })
 }, {
  func: (function() {
-  __GLOBAL__sub_I_Il2CppCodeRegistration_cpp();
- })
-}, {
- func: (function() {
   __GLOBAL__sub_I_Lump_libil2cpp_vm_cpp();
  })
 }, {
@@ -3383,10 +3379,14 @@ __ATINIT__.push({
  })
 }, {
  func: (function() {
+  __GLOBAL__sub_I_Il2CppCodeRegistration_cpp();
+ })
+}, {
+ func: (function() {
   ___emscripten_environ_constructor();
  })
 });
-var STATIC_BUMP = 3162048;
+var STATIC_BUMP = 3163120;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 var tempDoublePtr = STATICTOP;
@@ -3402,6 +3402,14 @@ function _JS_Cursor_SetShow(show) {
 }
 function _JS_Eval_ClearInterval(id) {
  window.clearInterval(id);
+}
+function _JS_Eval_EvalJS(ptr) {
+ var str = Pointer_stringify(ptr);
+ try {
+  eval(str);
+ } catch (exception) {
+  console.error(exception);
+ }
 }
 function _JS_Eval_OpenURL(ptr) {
  var str = Pointer_stringify(ptr);
@@ -3690,6 +3698,11 @@ function _JS_SystemInfo_GetPreferredDevicePixelRatio() {
 function _JS_SystemInfo_GetScreenSize(outWidth, outHeight) {
  HEAPF64[outWidth >> 3] = UnityLoader.SystemInfo.width;
  HEAPF64[outHeight >> 3] = UnityLoader.SystemInfo.height;
+}
+function _JS_SystemInfo_GetStreamingAssetsURL(buffer, bufferSize) {
+ var streamingAssetsUrl = Module.streamingAssetsUrl();
+ if (buffer) stringToUTF8(streamingAssetsUrl, buffer, bufferSize);
+ return lengthBytesUTF8(streamingAssetsUrl);
 }
 function _JS_SystemInfo_HasCursorLock() {
  return UnityLoader.SystemInfo.hasCursorLock;
@@ -19224,6 +19237,7 @@ Module.asmLibraryArg = {
  "_JS_Cursor_SetImage": _JS_Cursor_SetImage,
  "_JS_Cursor_SetShow": _JS_Cursor_SetShow,
  "_JS_Eval_ClearInterval": _JS_Eval_ClearInterval,
+ "_JS_Eval_EvalJS": _JS_Eval_EvalJS,
  "_JS_Eval_OpenURL": _JS_Eval_OpenURL,
  "_JS_Eval_SetInterval": _JS_Eval_SetInterval,
  "_JS_FileSystem_Initialize": _JS_FileSystem_Initialize,
@@ -19256,6 +19270,7 @@ Module.asmLibraryArg = {
  "_JS_SystemInfo_GetOS": _JS_SystemInfo_GetOS,
  "_JS_SystemInfo_GetPreferredDevicePixelRatio": _JS_SystemInfo_GetPreferredDevicePixelRatio,
  "_JS_SystemInfo_GetScreenSize": _JS_SystemInfo_GetScreenSize,
+ "_JS_SystemInfo_GetStreamingAssetsURL": _JS_SystemInfo_GetStreamingAssetsURL,
  "_JS_SystemInfo_HasCursorLock": _JS_SystemInfo_HasCursorLock,
  "_JS_SystemInfo_HasFullscreen": _JS_SystemInfo_HasFullscreen,
  "_JS_SystemInfo_HasWebGL": _JS_SystemInfo_HasWebGL,
